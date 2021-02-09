@@ -1,43 +1,27 @@
 package com.fivepoints.spring.entities;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "users")
-public class User implements Serializable {
+@Table(name = "roles")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(value = AccessLevel.NONE)
     private long id;
 
+    @Column(name = "name")
     @NonNull
-    @Column(name = "firstName")
-    private String firstName;
-    @NonNull
-    @Column(name = "lastName")
-    private String lastName;
-    @NonNull
-    @Column(name = "email")
-    private String email;
-    @NonNull
-    @Column(name = "password")
-    private String password;
-
-    // OneTOOne Relations
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "details_id", referencedColumnName = "id")
-    private UserDetails details;
+    private String name;
 
     @Setter(value = AccessLevel.NONE)
     @Basic(optional = false)

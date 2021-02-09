@@ -1,43 +1,35 @@
 package com.fivepoints.spring.entities;
 
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.Setter;
-
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "users")
-public class User implements Serializable {
+@Table(name = "user-details")
+public class UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(value = AccessLevel.NONE)
     private long id;
 
-    @NonNull
-    @Column(name = "firstName")
-    private String firstName;
-    @NonNull
-    @Column(name = "lastName")
-    private String lastName;
-    @NonNull
-    @Column(name = "email")
-    private String email;
-    @NonNull
-    @Column(name = "password")
-    private String password;
+    @Column(name = "age")
+    private int age;
+    @Column(name = "birth-date")
+    private Date birthDate;
+    @Column(name = "github-profile-link")
+    private String githubProfileLink;
+    @Column(name = "linkedin-profile-link")
+    private String linkedinProfileLink;
 
     // OneTOOne Relations
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "details_id", referencedColumnName = "id")
-    private UserDetails details;
+    @OneToOne(mappedBy = "details")
+    private User user;
 
     @Setter(value = AccessLevel.NONE)
     @Basic(optional = false)
