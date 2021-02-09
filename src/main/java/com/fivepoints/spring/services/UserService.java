@@ -41,6 +41,9 @@ public class UserService {
             existingUser.setLastName(user.getLastName());
             existingUser.setEmail(user.getEmail());
             existingUser.setPassword(user.getPassword());
+            // save existingUser in the database
+            this.userRepository.save(existingUser);
+            // return statement
             return "User updated successfully!";
         } else {
             return "User not found";

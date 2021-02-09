@@ -1,27 +1,31 @@
 package com.fivepoints.spring.entities;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @Entity
 @Table(name = "posts")
-public class Post {
+@NoArgsConstructor
+@RequiredArgsConstructor
+public class Post implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(value = AccessLevel.NONE)
     private long id;
 
+    @NonNull
     @Column(name = "title")
     private String title;
+    @NonNull
     @Column(name = "description")
     private String description;
+    @NonNull
     @Column(name = "published")
     private boolean published;
 

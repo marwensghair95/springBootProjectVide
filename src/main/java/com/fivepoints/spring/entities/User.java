@@ -1,12 +1,8 @@
 package com.fivepoints.spring.entities;
 
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +11,8 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "users")
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,9 +33,9 @@ public class User implements Serializable {
     private String password;
 
     // OneTOOne Relations
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "details_id", referencedColumnName = "id")
-    private UserDetails details;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "details_id", referencedColumnName = "id")
+//    private UserDetails details;
 
     @Setter(value = AccessLevel.NONE)
     @Basic(optional = false)

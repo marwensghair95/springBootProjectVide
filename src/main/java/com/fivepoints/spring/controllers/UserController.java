@@ -38,7 +38,7 @@ public class UserController {
         if (user != null) {
             return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("User not found!", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new MessageResponse("User not found!"), HttpStatus.NOT_FOUND);
         }
     }
 
