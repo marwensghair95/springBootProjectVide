@@ -2,6 +2,7 @@ package com.fivepoints.spring;
 
 import com.fivepoints.spring.entities.Role;
 import com.fivepoints.spring.entities.User;
+import com.fivepoints.spring.entities.UserDetails;
 import com.fivepoints.spring.repositories.PostRepository;
 import com.fivepoints.spring.repositories.RoleRepository;
 import com.fivepoints.spring.repositories.UserDetailsRepository;
@@ -12,6 +13,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.Date;
 
 @SpringBootApplication
 @EnableSwagger2
@@ -32,16 +35,32 @@ public class Application implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
+		// Clean up database tables
+		this.roleRepository.deleteAllInBatch();
+		this.userRepository.deleteAllInBatch();
+		this.userDetailsRepository.deleteAllInBatch();
+		this.postRepository.deleteAllInBatch();
+
 		// Save roles
 		Role superAdminRole = this.roleRepository.save(new Role("super-admin"));
 		Role adminRole = this.roleRepository.save(new Role("admin"));
 		Role userRole = this.roleRepository.save(new Role("user"));
 		Role guestRole = this.roleRepository.save(new Role("guest"));
 
+
 		// Save users
-		User user1 = this.userRepository.save(new User("hatem", "dagbouj", "hatem.dagbouj@fivepoints.fr", "123456789"));
+		User user1 = this.userRepository.save(new User("hatem", "dagbouj",
+					"hatem.dagbouj@fivepoints.fr", "123456789"));
 
 		// Save users details
+		UserDetails userDetails1 = this.userDetailsRepository.save(new UserDetails(20, new Date("11/11/1994"),
+				"github.com/hatem", "linkedin.com/hatem"));
+
+		// Affect user1 to userDetails1
+		user1.setDetails(userDetails1);
+		userDetails1.setUser(user1);
+		this.userRepository.save(user1);
+
 
 		// Save Posts
 

@@ -33,9 +33,9 @@ public class User implements Serializable {
     private String password;
 
     // OneTOOne Relations
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "details_id", referencedColumnName = "id")
-//    private UserDetails details;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "details_id", referencedColumnName = "id")
+    private UserDetails details;
 
     @Setter(value = AccessLevel.NONE)
     @Basic(optional = false)

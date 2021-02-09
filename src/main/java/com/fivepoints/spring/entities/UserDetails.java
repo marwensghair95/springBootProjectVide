@@ -1,9 +1,6 @@
 package com.fivepoints.spring.entities;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -14,6 +11,8 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "user_details")
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class UserDetails implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,8 +33,8 @@ public class UserDetails implements Serializable {
     private String linkedinProfileLink;
 
     // OneTOOne Relations
-//    @OneToOne(mappedBy = "details")
-//    private User user;
+    @OneToOne(mappedBy = "details")
+    private User user;
 
     @Setter(value = AccessLevel.NONE)
     @Basic(optional = false)
