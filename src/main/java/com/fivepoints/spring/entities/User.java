@@ -1,5 +1,6 @@
 package com.fivepoints.spring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -7,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -33,9 +35,14 @@ public class User implements Serializable {
     private String password;
 
     // OneToOne Relations
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "details_id", referencedColumnName = "id")
     private UserDetails details;
+    // OneToMany Relations
+    @JsonIgnore
+    @OneToMany(mappedBy="user")
+    private List<Post> posts;
 
     @Setter(value = AccessLevel.NONE)
     @Basic(optional = false)

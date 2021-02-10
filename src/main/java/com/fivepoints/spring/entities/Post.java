@@ -29,6 +29,11 @@ public class Post implements Serializable {
     @Column(name = "published")
     private boolean published;
 
+    // OneToMany Relations
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
+    private User user;
+
     @Setter(value = AccessLevel.NONE)
     @Basic(optional = false)
     @CreationTimestamp

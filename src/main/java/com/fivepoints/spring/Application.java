@@ -16,6 +16,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @SpringBootApplication
 @EnableSwagger2
@@ -64,6 +66,18 @@ public class Application implements ApplicationRunner {
 
 
 		// Save Posts
+		Post post1 = new Post("","", true);
+		Post post2 = new Post("","", true);
+		Post post3 = new Post("","", true);
+		// associate user1 to posts
+		post1.setUser(user1);
+		post2.setUser(user1);
+		post3.setUser(user1);
+		this.postRepository.save(post1);
+		this.postRepository.save(post2);
+		this.postRepository.save(post3);
+		this.userRepository.save(user1);
+
 
 	}
 }
