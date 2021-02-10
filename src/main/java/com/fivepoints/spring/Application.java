@@ -16,6 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -76,6 +77,15 @@ public class Application implements ApplicationRunner {
 		this.postRepository.save(post1);
 		this.postRepository.save(post2);
 		this.postRepository.save(post3);
+		this.userRepository.save(user1);
+
+		// ManyToMany Relations
+		Set<Role> roles = new HashSet<>();
+		roles.add(superAdminRole);
+		roles.add(adminRole);
+		roles.add(userRole);
+		roles.add(guestRole);
+		user1.setRoles(roles);
 		this.userRepository.save(user1);
 
 

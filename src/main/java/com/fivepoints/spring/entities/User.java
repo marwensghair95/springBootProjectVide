@@ -8,7 +8,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -43,6 +45,17 @@ public class User implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy="user")
     private List<Post> posts;
+    // ManyToMany Relations
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "roles_users",
+            joinColumns = { @JoinColumn(name = "roles_id") },
+            inverseJoinColumns = { @JoinColumn(name = "users_id") })
+    private Set<Role> roles = new HashSet<>();
+
 
     @Setter(value = AccessLevel.NONE)
     @Basic(optional = false)
