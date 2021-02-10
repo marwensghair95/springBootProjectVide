@@ -32,7 +32,7 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;
 
-    // OneTOOne Relations
+    // OneToOne Relations
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "details_id", referencedColumnName = "id")
     private UserDetails details;

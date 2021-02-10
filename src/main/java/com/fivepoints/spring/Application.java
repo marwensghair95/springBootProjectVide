@@ -1,5 +1,6 @@
 package com.fivepoints.spring;
 
+import com.fivepoints.spring.entities.Post;
 import com.fivepoints.spring.entities.Role;
 import com.fivepoints.spring.entities.User;
 import com.fivepoints.spring.entities.UserDetails;
@@ -49,16 +50,16 @@ public class Application implements ApplicationRunner {
 
 
 		// Save users
-		User user1 = this.userRepository.save(new User("hatem", "dagbouj",
-					"hatem.dagbouj@fivepoints.fr", "123456789"));
+		User user1 = new User("hatem", "dagbouj",
+					"hatem.dagbouj@fivepoints.fr", "123456789");
 
 		// Save users details
-		UserDetails userDetails1 = this.userDetailsRepository.save(new UserDetails(20, new Date("11/11/1994"),
-				"github.com/hatem", "linkedin.com/hatem"));
+		UserDetails userDetails1 = new UserDetails(20, new Date("11/11/1994"),
+				"github.com/hatem", "linkedin.com/hatem");
 
 		// Affect user1 to userDetails1
-		user1.setDetails(userDetails1);
-		userDetails1.setUser(user1);
+		user1.setDetails(userDetails1); // Set child reference
+		userDetails1.setUser(user1); // Set parent reference
 		this.userRepository.save(user1);
 
 

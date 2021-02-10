@@ -32,7 +32,7 @@ public class UserDetails implements Serializable {
     @Column(name = "linkedin_profile_link")
     private String linkedinProfileLink;
 
-    // OneTOOne Relations
+    // OneToOne Relations
     @OneToOne(mappedBy = "details")
     private User user;
 
