@@ -57,8 +57,8 @@ public class Application implements ApplicationRunner {
 					"hatem.dagbouj@fivepoints.fr", "123456789");
 
 		// Save users details
-		UserDetails userDetails1 = new UserDetails(20, new Date("11/11/1994"),
-				"github.com/hatem", "linkedin.com/hatem");
+		UserDetails userDetails1 = new UserDetails(20, "+216 xx xx xx xx", new Date("11/11/1994"),
+				"https://github.com/dagboujhatem", "https://www.linkedin.com/in/dagbouj-hatem");
 
 		// Affect user1 to userDetails1
 		user1.setDetails(userDetails1); // Set child reference
@@ -68,7 +68,7 @@ public class Application implements ApplicationRunner {
 
 		// Save Posts
 		Post post1 = new Post("","", true);
-		Post post2 = new Post("","", true);
+		Post post2 = new Post("","", false);
 		Post post3 = new Post("","", true);
 		// associate user1 to posts
 		post1.setUser(user1);

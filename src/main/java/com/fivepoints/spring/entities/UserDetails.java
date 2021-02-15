@@ -23,6 +23,9 @@ public class UserDetails implements Serializable {
     @Column(name = "age")
     private int age;
     @NonNull
+    @Column(name = "phone_number")
+    private String phoneNumber;
+    @NonNull
     @Column(name = "birth_date")
     private Date birthDate;
     @NonNull
