@@ -10,6 +10,13 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
+/**
+ *
+ *  Please visit this link for API documentation:
+ *  Link of documentations : http://localhost:8080/api/v1/swagger-ui/index.html
+ */
+
+
 @Configuration
 public class SpringFoxConfig {
     @Bean
