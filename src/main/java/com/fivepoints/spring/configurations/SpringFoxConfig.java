@@ -28,10 +28,10 @@ public class SpringFoxConfig {
                 .title("Swagger Sample APIs")
                 .description("This page lists all the rest apis for Swagger Sample App.")
                 .version("1.0.0")
-//                .license("Apache License Version 2.0")
-//                .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
-//                .termsOfServiceUrl("https://gitee.com/log4j/pig")
-//                .contact(new Contact("DAGBOUJ Hatem","https://github.com/dagboujhatem","dagboujhatem@gmail.com"))
+                .license("Apache License Version 2.0")
+                .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
+                .termsOfServiceUrl("https://gitee.com/log4j/pig")
+                .contact(new Contact("DAGBOUJ Hatem","https://github.com/dagboujhatem","dagboujhatem@gmail.com"))
                 .build();
     }
 }
