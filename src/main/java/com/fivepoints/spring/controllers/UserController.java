@@ -35,11 +35,7 @@ public class UserController {
     public ResponseEntity<?> findUserByID(@PathVariable("id") long id)
     {
         User user = this.userService.findUserByID(id);
-        if (user != null) {
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(new MessageResponse("User not found!"), HttpStatus.NOT_FOUND);
-        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

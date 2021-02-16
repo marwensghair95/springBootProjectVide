@@ -26,6 +26,35 @@ public class UserDetails implements Serializable {
     @Column(name = "phone_number")
     private String phoneNumber;
     @NonNull
+    @Enumerated(EnumType.STRING)
+    @Column(length = 10)
+    private Gender gender;
+    @NonNull
+    @Temporal(TemporalType.DATE)
+    @Column(name = "date_of_birth")
+    private Date dateOfBirth;
+    @NonNull
+    @Column(name = "address1")
+    private String address1;
+    @NonNull
+    @Column(name = "address2")
+    private String address2;
+    @NonNull
+    @Column(name = "street")
+    private String street;
+    @NonNull
+    @Column(name = "city")
+    private String city;
+    @NonNull
+    @Column(name = "state")
+    private String state;
+    @NonNull
+    @Column(name = "country")
+    private String country;
+    @NonNull
+    @Column(name = "zip_code")
+    private String zipCode;
+    @NonNull
     @Column(name = "birth_date")
     private Date birthDate;
     @NonNull

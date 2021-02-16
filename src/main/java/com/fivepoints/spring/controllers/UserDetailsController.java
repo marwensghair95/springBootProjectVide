@@ -35,11 +35,7 @@ public class UserDetailsController {
     public ResponseEntity<?> findUserDetailsByID(@PathVariable("id") long id)
     {
         UserDetails userDetails = this.userDetailsService.findUserDetailsByID(id);
-        if (userDetails != null) {
-            return new ResponseEntity<>(userDetails, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(new MessageResponse("User details not found!"), HttpStatus.NOT_FOUND);
-        }
+        return new ResponseEntity<>(userDetails, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

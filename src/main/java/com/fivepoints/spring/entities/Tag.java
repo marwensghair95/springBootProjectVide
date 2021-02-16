@@ -12,41 +12,28 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "posts")
+@Table(name = "tags")
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class Post implements Serializable {
+public class Tag implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(value = AccessLevel.NONE)
     private long id;
 
     @NonNull
-    @Column(name = "title")
-    private String title;
-    @NonNull
-    @Column(name = "description")
-    @Lob
-    private String description;
-    @NonNull
-    @Column(name = "published")
-    private boolean published;
+    @Column(name = "name")
+    private String name;
 
-    // OneToMany Relations
-    @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
-    private User user;
-
-    // ManyToMany Relations
+    // Relation
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
-            })
-    @JoinTable(name = "post_tags",
-            joinColumns = { @JoinColumn(name = "post_id") },
-            inverseJoinColumns = { @JoinColumn(name = "tag_id") })
-    private Set<Tag> tags = new HashSet<>();
+            },
+            mappedBy = "tags")
+    private Set<Post> posts = new HashSet<>();
 
     @Setter(value = AccessLevel.NONE)
     @Basic(optional = false)

@@ -6,9 +6,16 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.Contact;
+import springfox.documentation.service.SecurityScheme;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 /**
  *
@@ -22,6 +29,9 @@ public class SpringFoxConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .produces(new LinkedHashSet<>(Arrays.asList("application/json", "application/xml")))
+                .protocols(new HashSet<>(Arrays.asList("http","https")))
+                .securitySchemes(securitySchemes())
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.any())
@@ -40,5 +50,10 @@ public class SpringFoxConfig {
                 .termsOfServiceUrl("https://gitee.com/log4j/pig")
                 .contact(new Contact("DAGBOUJ Hatem","https://github.com/dagboujhatem","dagboujhatem@gmail.com"))
                 .build();
+    }
+
+    private static ArrayList<? extends SecurityScheme> securitySchemes() {
+
+        return [new ApiKey("Bearer", "Authorization", "header")];
     }
 }

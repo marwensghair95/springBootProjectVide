@@ -1,6 +1,7 @@
 package com.fivepoints.spring.services;
 
 import com.fivepoints.spring.entities.Post;
+import com.fivepoints.spring.exceptions.ResourceNotFoundException;
 import com.fivepoints.spring.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class PostService {
     {
         Optional<Post> postData = this.postRepository.findById(id);
         // Return statement if user exist or null
-        return postData.orElse(null);
+        return postData.orElseThrow(() -> new ResourceNotFoundException("Post not found"));
 
     }
 
@@ -45,7 +46,7 @@ public class PostService {
             // return statement
             return "Post updated successfully!";
         } else {
-            return "Post not found";
+            throw new ResourceNotFoundException("Post not found");
         }
     }
 
@@ -56,7 +57,17 @@ public class PostService {
             this.postRepository.deleteById(id);
             return "Post deleted successfully!";
         } else {
-            return "Post not found";
+            throw new ResourceNotFoundException("Post not found");
         }
+    }
+
+    public List<Post> findByPublished()
+    {
+        return  this.postRepository.findByPublished(true);
+    }
+
+    public List<Post> findByTitleContaining(String title)
+    {
+        return  this.postRepository.findByTitleContaining(title);
     }
 }

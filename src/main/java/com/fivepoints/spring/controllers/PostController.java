@@ -35,11 +35,7 @@ public class PostController {
     public ResponseEntity<?> findPostByID(@PathVariable("id") long id)
     {
         Post post = this.postService.findPostByID(id);
-        if (post != null) {
-            return new ResponseEntity<>(post, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(new MessageResponse("Post not found!"), HttpStatus.NOT_FOUND);
-        }
+        return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
@@ -54,5 +50,19 @@ public class PostController {
     {
         String message = this.postService.deletePostById(id);
         return new ResponseEntity<>(new MessageResponse(message), HttpStatus.OK);
+    }
+    
+    @GetMapping("/only-published")
+    public ResponseEntity<List<Post>> findByPublished()
+    {
+        List<Post> listPublishedPosts = this.postService.findByPublished();
+        return new ResponseEntity<>(listPublishedPosts, HttpStatus.OK);
+    }
+
+    @GetMapping("/search-by-title/{title}")
+    public ResponseEntity<List<Post>> findByTitleContaining(@PathVariable("title") String title)
+    {
+        List<Post> filtredPosts = this.postService.findByTitleContaining(title);
+        return new ResponseEntity<>(filtredPosts, HttpStatus.OK);
     }
 }

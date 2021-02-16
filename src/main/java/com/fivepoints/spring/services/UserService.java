@@ -1,6 +1,7 @@
 package com.fivepoints.spring.services;
 
 import com.fivepoints.spring.entities.User;
+import com.fivepoints.spring.exceptions.ResourceNotFoundException;
 import com.fivepoints.spring.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,8 @@ public class UserService {
     public User findUserByID(long id)
     {
         Optional<User> userData = this.userRepository.findById(id);
-        // Return statement if user exist or null
-        return userData.orElse(null);
+        // Return statement if user exist or throw exception
+        return userData.orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
     }
 
@@ -46,7 +47,7 @@ public class UserService {
             // return statement
             return "User updated successfully!";
         } else {
-            return "User not found";
+            throw new ResourceNotFoundException("User not found");
         }
     }
 
@@ -57,7 +58,7 @@ public class UserService {
             this.userRepository.deleteById(id);
             return "User deleted successfully!";
         } else {
-            return "User not found";
+            throw new ResourceNotFoundException("User not found");
         }
     }
 

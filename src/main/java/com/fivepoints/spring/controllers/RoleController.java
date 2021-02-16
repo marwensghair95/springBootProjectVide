@@ -35,11 +35,7 @@ public class RoleController {
     public ResponseEntity<?> findUserByID(@PathVariable("id") long id)
     {
         Role role = this.roleService.findRoleByID(id);
-        if (role != null) {
-            return new ResponseEntity<>(role, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(new MessageResponse("Role not found!"), HttpStatus.NOT_FOUND);
-        }
+        return new ResponseEntity<>(role, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
