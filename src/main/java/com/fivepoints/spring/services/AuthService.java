@@ -35,6 +35,7 @@ public class AuthService {
     }
 
     public String register(RegisterRequest registerRequest) throws EmailAlreadyUsedException {
+        // test if email already used
         if (this.userRepository.existsByEmail(registerRequest.getEmail())) {
             throw new EmailAlreadyUsedException("Error: Email is already in use!");
         }
