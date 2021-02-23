@@ -21,9 +21,10 @@ public class Role implements Serializable {
     @Setter(value = AccessLevel.NONE)
     private long id;
 
-    @Column(name = "name")
     @NonNull
-    private String name;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 15)
+    private ERole name;
     // ManyToMany Relations
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {

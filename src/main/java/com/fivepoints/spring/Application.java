@@ -46,10 +46,10 @@ public class Application implements ApplicationRunner {
 		this.commentRepository.deleteAllInBatch();
 
 		// Save roles
-		Role superAdminRole = this.roleRepository.save(new Role("super-admin"));
-		Role adminRole = this.roleRepository.save(new Role("admin"));
-		Role userRole = this.roleRepository.save(new Role("user"));
-		Role guestRole = this.roleRepository.save(new Role("guest"));
+		Role superAdminRole = this.roleRepository.save(new Role(ERole.SUPER_ADMIN));
+		Role adminRole = this.roleRepository.save(new Role(ERole.ADMIN));
+		Role userRole = this.roleRepository.save(new Role(ERole.USER));
+		Role guestRole = this.roleRepository.save(new Role(ERole.GUEST));
 
 
 		// Save users

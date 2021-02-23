@@ -71,6 +71,12 @@
 			<version>2.10.2</version>
 		</dependency>
 		<!-- end Swagger ui dependencies -->
+		<!-- begin spring security core dependencies -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+		</dependency>
+		<!-- end spring security core dependencies -->
 	</dependencies>
 
 	<build>
