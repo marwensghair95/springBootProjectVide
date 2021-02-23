@@ -1,5 +1,6 @@
 package com.fivepoints.spring.controllers;
 
+import com.fivepoints.spring.exceptions.EmailAlreadyUsedException;
 import com.fivepoints.spring.payload.requests.LoginRequest;
 import com.fivepoints.spring.payload.requests.RegisterRequest;
 import com.fivepoints.spring.payload.responses.MessageResponse;
@@ -28,8 +29,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<MessageResponse> register(@Valid @RequestBody RegisterRequest registerRequest)
-    {
+    public ResponseEntity<MessageResponse> register(@Valid @RequestBody RegisterRequest registerRequest) throws EmailAlreadyUsedException {
         String message = this.authService.register(registerRequest);
         return ResponseEntity.ok(new MessageResponse(message));
     }

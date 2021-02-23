@@ -3,6 +3,7 @@ package com.fivepoints.spring.services;
 import com.fivepoints.spring.entities.ERole;
 import com.fivepoints.spring.entities.Role;
 import com.fivepoints.spring.entities.User;
+import com.fivepoints.spring.exceptions.EmailAlreadyUsedException;
 import com.fivepoints.spring.exceptions.ResourceNotFoundException;
 import com.fivepoints.spring.payload.requests.LoginRequest;
 import com.fivepoints.spring.payload.requests.RegisterRequest;
@@ -33,12 +34,9 @@ public class AuthService {
 
     }
 
-    public String register(RegisterRequest registerRequest)
-    {
+    public String register(RegisterRequest registerRequest) throws EmailAlreadyUsedException {
         if (this.userRepository.existsByEmail(registerRequest.getEmail())) {
-//            return ResponseEntity
-//                    .badRequest()
-//                    .body(new MessageResponse("Error: Email is already in use!"));
+            throw new EmailAlreadyUsedException("Error: Email is already in use!");
         }
         // Create new user account
         User user = new User();
