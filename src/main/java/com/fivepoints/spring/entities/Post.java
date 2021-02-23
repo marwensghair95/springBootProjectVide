@@ -1,5 +1,6 @@
 package com.fivepoints.spring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -15,7 +17,7 @@ import java.util.Set;
 @Table(name = "posts")
 @NoArgsConstructor
 @RequiredArgsConstructor
-@EqualsAndHashCode(exclude = {"createdAt", "updatedAt", "user", "tags"})
+@EqualsAndHashCode(exclude = {"createdAt", "updatedAt", "user", "tags", "comments"})
 public class Post implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,6 +39,10 @@ public class Post implements Serializable {
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private User user;
+
+    @JsonIgnore
+    @OneToMany(mappedBy="post")
+    private List<Comment> comments;
 
     // ManyToMany Relations
     @ManyToMany(fetch = FetchType.LAZY,

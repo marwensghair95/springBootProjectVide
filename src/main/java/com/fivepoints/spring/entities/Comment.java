@@ -29,14 +29,11 @@ public class Comment implements Serializable {
     private String text;
 
     // Relation
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Post post;
-
-
-
 
     @Setter(value = AccessLevel.NONE)
     @Basic(optional = false)
