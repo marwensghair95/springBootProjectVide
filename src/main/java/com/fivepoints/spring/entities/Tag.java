@@ -15,6 +15,7 @@ import java.util.Set;
 @Table(name = "tags")
 @NoArgsConstructor
 @RequiredArgsConstructor
+@EqualsAndHashCode(exclude = {"createdAt", "updatedAt", "posts"})
 public class Tag implements Serializable {
 
     @Id

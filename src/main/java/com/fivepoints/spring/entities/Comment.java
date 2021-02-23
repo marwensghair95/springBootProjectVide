@@ -16,6 +16,7 @@ import java.util.Date;
 @Table(name = "comments")
 @NoArgsConstructor
 @RequiredArgsConstructor
+@EqualsAndHashCode(exclude = {"createdAt", "updatedAt", "post"})
 public class Comment implements Serializable {
 
     @Id
