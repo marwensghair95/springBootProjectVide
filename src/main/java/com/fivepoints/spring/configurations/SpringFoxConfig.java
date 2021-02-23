@@ -31,7 +31,7 @@ public class SpringFoxConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .produces(new LinkedHashSet<>(Arrays.asList("application/json", "application/xml")))
                 .protocols(new HashSet<>(Arrays.asList("http","https")))
-                .securitySchemes(securitySchemes())
+//                .securitySchemes(securitySchemes())
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.any())
@@ -52,8 +52,8 @@ public class SpringFoxConfig {
                 .build();
     }
 
-    private static ArrayList<? extends SecurityScheme> securitySchemes() {
-
-        return [new ApiKey("Bearer", "Authorization", "header")];
-    }
+//    private static ArrayList<? extends SecurityScheme> securitySchemes() {
+//
+//        return [new ApiKey("Bearer", "Authorization", "header")];
+//    }
 }
