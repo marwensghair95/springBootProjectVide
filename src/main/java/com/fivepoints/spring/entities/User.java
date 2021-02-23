@@ -17,6 +17,7 @@ import java.util.Set;
 @Table(name = "users")
 @NoArgsConstructor
 @RequiredArgsConstructor
+@EqualsAndHashCode(exclude = {"createdAt", "updatedAt", "details", "posts",  "roles"})
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,14 +47,10 @@ public class User implements Serializable {
     @OneToMany(mappedBy="user")
     private List<Post> posts;
     // ManyToMany Relations
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "roles_users",
-            joinColumns = { @JoinColumn(name = "roles_id") },
-            inverseJoinColumns = { @JoinColumn(name = "users_id") })
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "role_id") })
     private Set<Role> roles = new HashSet<>();
 
 

@@ -13,6 +13,7 @@ import java.util.Date;
 @Table(name = "user_details")
 @NoArgsConstructor
 @RequiredArgsConstructor
+@EqualsAndHashCode(exclude = {"createdAt", "updatedAt", "user"})
 public class UserDetails implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

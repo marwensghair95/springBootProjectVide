@@ -7,6 +7,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Calendar;
@@ -35,6 +37,12 @@ public class Application implements ApplicationRunner {
 		SpringApplication.run(Application.class, args);
 	}
 
+	// this bean used to crypt the password
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		// Clean up database tables
@@ -54,7 +62,8 @@ public class Application implements ApplicationRunner {
 
 		// Save users
 		User user1 = new User("hatem", "dagbouj",
-					"hatem.dagbouj@fivepoints.fr", "123456789");
+					"hatem.dagbouj@fivepoints.fr",
+				this.passwordEncoder().encode("123456789"));
 
 		// Save users details
 		Calendar dateOfBirth = Calendar.getInstance();
@@ -94,15 +103,15 @@ public class Application implements ApplicationRunner {
 //		this.postRepository.save(post2);
 //		this.postRepository.save(post3);
 //		this.userRepository.save(user1);
-//
-//		// ManyToMany Relations
-//		Set<Role> roles = new HashSet<>();
-//		roles.add(superAdminRole);
-//		roles.add(adminRole);
-//		roles.add(userRole);
-//		roles.add(guestRole);
-//		user1.setRoles(roles);
-//		this.userRepository.save(user1);
+
+		// ManyToMany Relations
+		Set<Role> roles = new HashSet<>();
+		roles.add(superAdminRole);
+		roles.add(adminRole);
+		roles.add(userRole);
+		roles.add(guestRole);
+		user1.setRoles(roles);
+		this.userRepository.save(user1);
 
 
 	}

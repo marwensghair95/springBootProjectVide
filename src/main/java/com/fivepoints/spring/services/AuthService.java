@@ -9,6 +9,7 @@ import com.fivepoints.spring.payload.requests.RegisterRequest;
 import com.fivepoints.spring.repositories.RoleRepository;
 import com.fivepoints.spring.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -22,6 +23,10 @@ public class AuthService {
 
     @Autowired
     RoleRepository roleRepository;
+
+    // pour crypter le password (NB: il faut ajouter le bean BCryptPasswordEncoder dans l'application)
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public void login(LoginRequest loginRequest)
     {
@@ -40,7 +45,7 @@ public class AuthService {
         user.setFirstName(registerRequest.getFirstName());
         user.setLastName(registerRequest.getLastName());
         user.setEmail(registerRequest.getEmail());
-        user.setPassword(registerRequest.getPassword());
+        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 
         // Traitement des Roles
         Set<String> registerRequestRoles = registerRequest.getRoles();
