@@ -3,6 +3,8 @@ package com.fivepoints.spring.controllers;
 import com.fivepoints.spring.entities.User;
 import com.fivepoints.spring.payload.responses.MessageResponse;
 import com.fivepoints.spring.services.UserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("users")
+@ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
 public class UserController {
 
     @Autowired
