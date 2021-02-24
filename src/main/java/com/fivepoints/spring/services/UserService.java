@@ -5,6 +5,7 @@ import com.fivepoints.spring.exceptions.ResourceNotFoundException;
 import com.fivepoints.spring.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -60,6 +61,17 @@ public class UserService {
         } else {
             throw new ResourceNotFoundException("User not found");
         }
+    }
+
+    @Transactional(readOnly = true)
+    public User findByEmail(String email) {
+        User user = null;
+        try {
+            user = userRepository.findByEmail(email);
+        } catch (Exception e) {
+            throw e;
+        }
+        return user;
     }
 
 }

@@ -73,10 +73,17 @@
 		<!-- end Swagger ui dependencies -->
 		<!-- begin spring security core dependencies -->
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<!-- end spring security core dependencies -->
+		<!-- begin json web token dependencies-->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+		<!-- end json web token dependencies-->
 	</dependencies>
 
 	<build>

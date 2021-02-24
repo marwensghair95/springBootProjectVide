@@ -3,6 +3,7 @@ package com.fivepoints.spring.controllers;
 import com.fivepoints.spring.exceptions.EmailAlreadyUsedException;
 import com.fivepoints.spring.payload.requests.LoginRequest;
 import com.fivepoints.spring.payload.requests.RegisterRequest;
+import com.fivepoints.spring.payload.responses.LoginResponse;
 import com.fivepoints.spring.payload.responses.MessageResponse;
 import com.fivepoints.spring.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,10 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public void login(@Valid @RequestBody LoginRequest loginRequest)
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest)
     {
-        this.authService.login(loginRequest);
+        String token = this.authService.login(loginRequest);
+        return ResponseEntity.ok(new LoginResponse(token,"Bearer", "Login successfully"));
     }
 
     @PostMapping("/register")

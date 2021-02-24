@@ -7,7 +7,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.ApplicationContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -20,6 +20,8 @@ import java.util.Set;
 @EnableSwagger2
 public class Application implements ApplicationRunner {
 
+	@Autowired
+	private ApplicationContext applicationContext;
 	@Autowired
 	UserRepository userRepository;
 	@Autowired
@@ -38,26 +40,27 @@ public class Application implements ApplicationRunner {
 	}
 
 	// this bean used to crypt the password
-	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+		BCryptPasswordEncoder passwordEncoderBean = applicationContext.getBean(BCryptPasswordEncoder.class);
+		return passwordEncoderBean;
 	}
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		// Clean up database tables
-		this.roleRepository.deleteAllInBatch();
-		this.userRepository.deleteAllInBatch();
-		this.userDetailsRepository.deleteAllInBatch();
-		this.postRepository.deleteAllInBatch();
-		this.tagRepository.deleteAllInBatch();
-		this.commentRepository.deleteAllInBatch();
+//		this.roleRepository.deleteAllInBatch();
+//		this.userRepository.deleteAllInBatch();
+//		this.userDetailsRepository.deleteAllInBatch();
+//		this.postRepository.deleteAllInBatch();
+//		this.tagRepository.deleteAllInBatch();
+//		this.commentRepository.deleteAllInBatch();
 
 		// Save roles
 		Role superAdminRole = this.roleRepository.save(new Role(ERole.SUPER_ADMIN));
 		Role adminRole = this.roleRepository.save(new Role(ERole.ADMIN));
 		Role userRole = this.roleRepository.save(new Role(ERole.USER));
 		Role guestRole = this.roleRepository.save(new Role(ERole.GUEST));
+
 
 
 		// Save users
