@@ -3,6 +3,8 @@ package com.fivepoints.spring.controllers;
 import com.fivepoints.spring.entities.User;
 import com.fivepoints.spring.payload.responses.MessageResponse;
 import com.fivepoints.spring.services.UserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("users")
+@ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
 public class UserController {
 
     @Autowired
@@ -49,6 +52,27 @@ public class UserController {
     public ResponseEntity<MessageResponse> deleteUserById(@PathVariable("id") long id)
     {
         String message = this.userService.deleteUserById(id);
+        return new ResponseEntity<>(new MessageResponse(message), HttpStatus.OK);
+    }
+
+    // Affecter Role to user
+    @PutMapping("/affect-role/{idUser}/{idRole}")
+    public ResponseEntity<MessageResponse> affectUserToRole(long idUser, long idRole) {
+        String message = this.userService.affectUserToRole(idUser, idRole);
+        return new ResponseEntity<>(new MessageResponse(message), HttpStatus.OK);
+    }
+
+    // Affecter Details to user
+    @PutMapping("/affect-details/{idUser}/{idDetails}")
+    public ResponseEntity<MessageResponse> affectUserToUserDetails(long idUser, long idDetails) {
+        String message = this.userService.affectUserToDetails(idUser, idDetails);
+        return new ResponseEntity<>(new MessageResponse(message), HttpStatus.OK);
+    }
+
+    // Affecter Post to user
+    @PutMapping("/affect-post/{idUser}/{idPost}")
+    public ResponseEntity<MessageResponse> affectUserToPost(long idUser, long idPost) {
+        String message = this.userService.affectUserToPost(idUser, idPost);
         return new ResponseEntity<>(new MessageResponse(message), HttpStatus.OK);
     }
 

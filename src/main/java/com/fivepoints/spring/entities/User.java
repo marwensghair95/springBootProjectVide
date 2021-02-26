@@ -1,5 +1,6 @@
 package com.fivepoints.spring.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -17,6 +18,7 @@ import java.util.Set;
 @Table(name = "users")
 @NoArgsConstructor
 @RequiredArgsConstructor
+@EqualsAndHashCode(exclude = {"createdAt", "updatedAt", "details", "posts",  "roles"})
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,14 +48,10 @@ public class User implements Serializable {
     @OneToMany(mappedBy="user")
     private List<Post> posts;
     // ManyToMany Relations
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "roles_users",
-            joinColumns = { @JoinColumn(name = "roles_id") },
-            inverseJoinColumns = { @JoinColumn(name = "users_id") })
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "role_id") })
     private Set<Role> roles = new HashSet<>();
 
 

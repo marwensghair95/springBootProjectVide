@@ -1,5 +1,7 @@
 package com.fivepoints.spring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -15,16 +17,19 @@ import java.util.Set;
 @Table(name = "roles")
 @NoArgsConstructor
 @RequiredArgsConstructor
+@EqualsAndHashCode(exclude = {"createdAt", "updatedAt", "users"})
 public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(value = AccessLevel.NONE)
     private long id;
 
-    @Column(name = "name")
     @NonNull
-    private String name;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 15)
+    private ERole name;
     // ManyToMany Relations
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
