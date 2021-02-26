@@ -55,4 +55,25 @@ public class UserController {
         return new ResponseEntity<>(new MessageResponse(message), HttpStatus.OK);
     }
 
+    // Affecter Role to user
+    @PutMapping("/affect-role/{idUser}/{idRole}")
+    public ResponseEntity<MessageResponse> affectUserToRole(long idUser, long idRole) {
+        String message = this.userService.affectUserToRole(idUser, idRole);
+        return new ResponseEntity<>(new MessageResponse(message), HttpStatus.OK);
+    }
+
+    // Affecter Details to user
+    @PutMapping("/affect-details/{idUser}/{idDetails}")
+    public ResponseEntity<MessageResponse> affectUserToUserDetails(long idUser, long idDetails) {
+        String message = this.userService.affectUserToDetails(idUser, idDetails);
+        return new ResponseEntity<>(new MessageResponse(message), HttpStatus.OK);
+    }
+
+    // Affecter Post to user
+    @PutMapping("/affect-post/{idUser}/{idPost}")
+    public ResponseEntity<MessageResponse> affectUserToPost(long idUser, long idPost) {
+        String message = this.userService.affectUserToPost(idUser, idPost);
+        return new ResponseEntity<>(new MessageResponse(message), HttpStatus.OK);
+    }
+
 }
